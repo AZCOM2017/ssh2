@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><s:submit value="上传" align="center"></s:submit></td>
+            <td><s:submit value="上传" align="center"/></td>
         </tr>
     </table>
 </s:form>

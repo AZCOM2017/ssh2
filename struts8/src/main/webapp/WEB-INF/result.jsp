@@ -12,6 +12,6 @@
     <title>上传结果</title>
 </head>
 <body>
-上传的文件：<s:property value="fileFileName"></s:property>
+上传的文件：<s:property value="fileFileName"/>
 </body>
 </html>

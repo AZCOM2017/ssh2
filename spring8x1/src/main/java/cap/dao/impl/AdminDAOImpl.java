@@ -1,6 +1,5 @@
 package cap.dao.impl;
 
-
 import cap.bean.Admin;
 import cap.dao.AdminDAO;
 import org.springframework.jdbc.core.RowMapper;
@@ -8,7 +7,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -17,11 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Repository(value = "adminDAO")
-public class AdminDAOImpl implements AdminDAO {
+//@Transactional
+//使用@Transactional 注解必须启用applicationContext.xml中的<tx:annotation-driven/>标签
 
+public class AdminDAOImpl implements AdminDAO {
     private class MyRowMapper implements RowMapper<Admin> {
+
 
         @Override
         public Admin mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -40,28 +41,27 @@ public class AdminDAOImpl implements AdminDAO {
 
     /*
     public void setDataSource(DataSource dataSource){
+
         this.namedParameterJdbcTemplate=new NamedParameterJdbcTemplate(dataSource);
 
     }
     */
 
-
     @Override
     public List<Admin> findAdmins() {
+
         String sql = "select * from user";
         return namedParameterJdbcTemplate.query(sql, new MyRowMapper());
-
     }
 
     @Override
     public Admin findById(int id) {
+
         String sql = "select * from user where id=:pk";
         Map<String, Object> params = new HashMap<>();
         params.put("pk", id);
         return namedParameterJdbcTemplate.queryForObject(sql, params, new MyRowMapper());
-
     }
-
 
     @Override
     public int updateAdmin(Admin admin) {
@@ -78,15 +78,16 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public int delAdmin(int id) {
         return 0;
-
     }
 
     @Override
-
     public int addAdmin(Admin admin) {
+
         String sql = "insert into user(username,password) values(:username,:password)";
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(admin);
-        return namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+        int res = namedParameterJdbcTemplate.update(sql, sqlParameterSource);
+        int result = 10 / 0;
+        return res;
 
     }
 

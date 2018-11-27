@@ -119,7 +119,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>orm</artifactId>
+            <artifactId>spring-orm</artifactId>
             <version>5.0.8.RELEASE</version>
         </dependency>
     </dependencies>

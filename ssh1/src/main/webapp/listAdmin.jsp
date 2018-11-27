@@ -14,7 +14,7 @@
 <body>
 
 <table>
-    <s:iterator value="adminList" var="admin">
+    <s:iterator value="adminList" var="user">
         <tr>
             <td><s:property value="#admin.id"/></td>
             <td><s:property value="#admin.username"/></td>

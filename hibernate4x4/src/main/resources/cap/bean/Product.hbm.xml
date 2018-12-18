@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
 
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
-
 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
 
     <class name="cap.bean.Product" table="m_product">
@@ -12,7 +10,6 @@
             <column name="id"/>
             <generator class="increment"/>
         </id>
-
 
         <property name="name" type="java.lang.String">
             <column name="NAME"/>
@@ -30,12 +27,15 @@
             <column name="STOCK"/>
         </property>
 
-
         <set name="orderItems" table="m_oderitem">
             <key column="product_id"></key>
             <one-to-many class="cap.bean.OrderItem"/>
         </set>
-
-
     </class>
+
+    <sql-query name="products">
+        <return class="cap.bean.Product"/>
+        select * from m_product as p where p.name like :name
+    </sql-query>
+
 </hibernate-mapping>
